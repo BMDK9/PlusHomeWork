@@ -1,7 +1,6 @@
 package com.example.practice.global.security;
 
 import com.example.practice.global.common.CommonErrorCode;
-import com.example.practice.global.common.CommonResponseDto;
 import com.example.practice.global.jwt.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;

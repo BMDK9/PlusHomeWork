@@ -17,7 +17,8 @@ public class UserDetailsServiceImpl {
                 new UsernameNotFoundException("해당 유저를 찾을 수 없습니다." + username));
         return new UserDetailsImpl(user);
     }
-    public UserDetailsImpl getUserById(Long userId){
+
+    public UserDetailsImpl getUserById(Long userId) {
         User user = userRepository.findById(userId)
             .orElseThrow(() ->
                 new UsernameNotFoundException("해당 유저를 찾을 수 없습니다." + userId));

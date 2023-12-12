@@ -5,8 +5,6 @@ import com.example.practice.domain.user.dto.SignupRequestDto;
 import com.example.practice.domain.user.service.UserService;
 import com.example.practice.global.common.CommonCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,4 +24,5 @@ public class UserController {
         userService.signup(signupRequestDto);
         return CommonUserResponseDto.of(CommonCode.OK);
     }
+
 }
