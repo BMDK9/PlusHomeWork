@@ -30,7 +30,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
         String token = jwtUtil.resolveToken(request);
-
+        log.warn("필터에 들어옴");
+        log.warn(token);
         if (Objects.nonNull(token)) {
             if (jwtUtil.validateToken(token)) {
                 Claims info = jwtUtil.getUserInfoFromToken(token);
@@ -49,6 +50,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.setContext(context);
                 // -> 이제 @AuthenticationPrincipal 로 조회할 수 있음
             } else {
+
+                log.warn("여기는 안돼");
                 // 인증정보가 존재하지 않을때
                 CommonErrorCode commonErrorCode = CommonErrorCode.TOKEN_FAIL;
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);

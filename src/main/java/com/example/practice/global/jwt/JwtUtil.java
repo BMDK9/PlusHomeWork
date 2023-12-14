@@ -1,6 +1,5 @@
 package com.example.practice.global.jwt;
 
-import com.example.practice.global.common.CommonErrorCode;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -15,6 +14,7 @@ import org.springframework.util.StringUtils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 
@@ -58,7 +58,7 @@ public class JwtUtil {
 //                .claim(AUTHORIZATION_KEY, role)    // claims에 정보를 넣어줌, 사용자 권한
                 .setExpiration(new Date(date.getTime() + TOKEN_TIME))   // 토큰 만료시간
                 .setIssuedAt(date)  // 발급일
-                .signWith(key, signatureAlgorithm)  //토큰 시크릿키 서명 알고리즘, dkaghghk dkfrhflwma
+                .signWith(key, signatureAlgorithm)  //토큰 시크릿키 서명 알고리즘
                 .compact();     ///토큰 생성
     }
 
@@ -82,8 +82,21 @@ public class JwtUtil {
     // 식별자인 "bearer "값이 있는 토큰을 찾고, 그 토큰이 "bearer "로 시작한다면, jwt 토큰
     // 해당토큰의 식별자 값인 "bearer "을 잘라서 리턴.
     public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        log.warn("토큰 확인");
+        // ========================================================
+        // 프론트 엔드 단에서 할 일을 구현한 코드
+        // Authorization 키 값을 뗀 것.
+        String bearerToken = getCookieValue(request, AUTHORIZATION_HEADER);
+
+        if (bearerToken==null) {
+            return null;
+        }
+        // ===================================================================
+
+        bearerToken = bearerToken.replace("%20", " ");
+
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+
             return bearerToken.substring(7);
         }
         return null;
@@ -112,4 +125,18 @@ public class JwtUtil {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
+    // ============================================================================
+    // 프론트 엔드 단에서 할 일을 구현한 코드
+    // Authorization 키 값을 뗀 것.
+    private String getCookieValue(HttpServletRequest req, String cookieName) {
+        if (req.getCookies() == null) {
+            return null;
+        }
+        return Arrays.stream(req.getCookies())
+            .filter(c -> c.getName().equals(cookieName))
+            .findFirst()
+            .map(Cookie::getValue)
+            .orElse(null);
+    }
+    // ==============================================================================
 }
