@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 public enum CommonCode {
 
     OK("성공했습니다.", HttpStatus.OK),
+    CREATE("작성되었습니다.", HttpStatus.CREATED),
     GOOD("사용 가능합니다.", HttpStatus.OK);
 
     private final String message;
