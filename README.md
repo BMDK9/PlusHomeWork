@@ -1,9 +1,9 @@
 # PlusHomeWork
 
-# API
+## API
 https://documenter.getpostman.com/view/30903657/2s9Ykraed1
 
-# Directory
+## Directory
 ```bash
 ├─build
 │  │  resolvedMainClassName
