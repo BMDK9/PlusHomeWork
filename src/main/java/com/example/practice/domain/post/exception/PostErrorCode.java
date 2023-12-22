@@ -9,7 +9,8 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum PostErrorCode implements ErrorCode {
 
-    NO_EXIST("해당 게시물이 없습니다.", HttpStatus.NOT_FOUND);
+    NO_EXIST("해당 게시물이 없습니다.", HttpStatus.NOT_FOUND),
+    NO_AUTHORITY("해당 권한이 없습니다.", HttpStatus.FORBIDDEN);
 
     private final String message;
     private final HttpStatus httpStatus;
