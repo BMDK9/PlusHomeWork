@@ -59,7 +59,7 @@ public class WebSecurityConfig {
             authorizeHttpRequests
 //                .requestMatchers("/error").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
-                .requestMatchers("/api/users/signup/**").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
+                .requestMatchers("/api/users/signup").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                 .requestMatchers("/api/users/login").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                 .requestMatchers("/api/users/check-name").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허
                 .requestMatchers("/api/posts/**").permitAll()
