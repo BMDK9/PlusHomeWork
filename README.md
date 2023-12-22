@@ -1,6 +1,11 @@
 # PlusHomeWork
+## ERD
+![PracticeERD](https://github.com/BMDK9/PlusHomeWork/assets/144665614/845c7b46-3cd4-42ef-bfd0-322c78a34179)
+
 
 ## API
+![practiceAPI](https://github.com/BMDK9/PlusHomeWork/assets/144665614/b4721409-bde0-4ba6-80fc-6a921df92513)
+
 https://documenter.getpostman.com/view/30903657/2s9Ykraed1
 
 ## Directory
