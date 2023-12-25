@@ -3,14 +3,16 @@ package com.example.practice.global.config;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties
 public class JasyptConfig {
 
     private static final String PASSWORD = "DB_DECRYPT_KEY";
-    private static final String ALGORITHM = "PBEWithMD5AndDES";
+    private static final String ALGORITHM = "PBEWithMD5AndTripleDES";
     private static final String KEY_OBJECTION_ITERATIONS = "1000";
     private static final String POOL_SIZE = "1";
     private static final String PROVIDER_NAME = "SunJCE";
