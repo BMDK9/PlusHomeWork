@@ -1,6 +1,17 @@
 # PlusHomeWork
+구현하지 못한 부분은 이메일 인증 부분입니다.
+해당 기능을 구현하기 위해서는 Redis 환경의 구축이 필요하다고 생각됩니다.
+저는 아직 Redis 환경을 할 줄 모르기에 다른 과제들부터 먼저 진행했고 시간 문제로 인해 결국 인증 부분을 미구현한 채로 제출합니다.
+
+같은 이유로 테스트 코드 또한 미구현 상태로 제출합니다.
+
+## ERD
+![PracticeERD](https://github.com/BMDK9/PlusHomeWork/assets/144665614/845c7b46-3cd4-42ef-bfd0-322c78a34179)
+
 
 ## API
+![practiceAPI](https://github.com/BMDK9/PlusHomeWork/assets/144665614/b4721409-bde0-4ba6-80fc-6a921df92513)
+
 https://documenter.getpostman.com/view/30903657/2s9Ykraed1
 
 ## Directory
