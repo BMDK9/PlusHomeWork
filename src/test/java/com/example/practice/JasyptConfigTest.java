@@ -10,11 +10,13 @@ public class JasyptConfigTest {
     void stringEncryptor() {
         // given
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(" ");
+        encryptor.setPassword("11111");
+        encryptor.setAlgorithm("PBEWithMD5AndTripleDES");
         String test = "test";
 
         // when, then
         String actual = encryptor.encrypt(test);
         Assertions.assertEquals(test, encryptor.decrypt(actual));
+        System.out.println(actual);
     }
 }
