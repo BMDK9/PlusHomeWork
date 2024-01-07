@@ -21,6 +21,7 @@ public class User {
 
     private String password;
 
+
     @Builder
     private User(Long id, String username, String password) {
         this.Id = id;
