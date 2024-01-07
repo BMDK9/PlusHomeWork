@@ -40,7 +40,10 @@ public class JwtUtil {
 
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-    // bean이 뜰 때 한번만 실행되는 메서드. byte배열에 암호화된 값을 복호화해서 넣고 key에 다시저장
+    // bean이 뜰 때 한번만 실행되는 메서드. byte배열에 암호화된 값을 복호화해서 넣고 key에 다시저장.
+    // PostConstruct 는 생성자가 실행된 이후에 실행되도록 설정하는 어노테이션입니다.
+    // spring 에서 bean 은 보통 싱글톤(하나의 애플리케이션에 하나의 인스턴스만 생성되는 객체)으로
+    // 동작하기 때문에 bean으로 생성되면서 한번만 실행되는 프로세스입니다.
     @PostConstruct
     public void init() {
         byte[] bytes = Base64.getDecoder().decode(secretKey);

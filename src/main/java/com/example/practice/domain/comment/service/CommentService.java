@@ -27,7 +27,11 @@ public class CommentService {
     @Transactional
     public CreateCommentResponseDto createComment(Post post, CreateCommentRequestDto requestDto, User user) {
 
-        Comment saveComment = Comment.builder().commentText(requestDto.getCommentText()).user(user).post(post).build();
+        Comment saveComment = Comment.builder()
+                .commentText(requestDto.getCommentText())
+                .user(user)
+                .post(post)
+                .build();
 
         commentRepository.save(saveComment);
 

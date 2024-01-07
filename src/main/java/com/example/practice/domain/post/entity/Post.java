@@ -53,17 +53,6 @@ public class Post extends BaseTime {
         this.postLikeCnt = postLikeCnt;
     }
 
-    public static Post of(Post post) {
-        return Post.builder()
-            .id(post.getId())
-            .title(post.getTitle())
-            .user(post.getUser())
-            .content(post.getContent())
-            .image(post.getImage())
-            .postLikeCnt(post.getPostLikeCnt())
-            .build();
-    }
-
     public void update(UpdatePostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
