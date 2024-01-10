@@ -32,6 +32,14 @@ jobs:
       - name: Add permission
         run: chmod +x gradlew
 
+      - name: make application-prod.properties
+        if: contains(github.ref, 'develop') || contains(github.ref, 'main')
+        run: |
+          cd ./src/main/resources
+          touch ./application-prod.properties
+          echo "${{ secrets.YML_PROD }}" > ./application-prod.properties
+        shell: bash
+
       - name: Build Cache
         run: ./gradlew clean build --stacktrace
 
