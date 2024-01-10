@@ -48,7 +48,8 @@ jobs:
           --ignore-hidden-files --s3-location s3://${{ env.AWS_S3_BUCKET }}/cicd-test-ecc/$GITHUB_SHA.zip --source .
 
       - name: Deploy to EC2
-        run: aws deploy create-deployment --application-name ${{ env.AWS_CODE_DEPLOY_APPLICATION }} \
+        run: |
+          aws deploy create-deployment --application-name ${{ env.AWS_CODE_DEPLOY_APPLICATION }} \
           --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name ${{ env.AWS_CODE_DEPLOY_GROUP }} \
           --s3-location bucket=${{ env.AWS_S3_BUCKET }},key=cicd-test-ecc/$GITHUB_SHA.zip,bundleType=zip
 
