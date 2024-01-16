@@ -117,9 +117,9 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            docker pull ${{ secrets.DOCKER_USER }}/tming:latest
-            docker stop tming
-            docker rm tming
-            docker run -d --network tming --name tming -p 8080:8080 ${{ secrets.DOCKER_USER }}/tming
+            docker pull ${{ secrets.DOCKER_USER }}/practice:latest
+            docker stop practice
+            docker rm practice
+            docker run -d --network practice --name practice -p 8080:8080 ${{ secrets.DOCKER_USER }}/tming
             if docker images -f "dangling=true" -q | grep . > /dev/null; then
               docker rmi $(docker images -f "dangling=true" -q)
