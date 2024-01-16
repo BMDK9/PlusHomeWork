@@ -58,7 +58,7 @@ jobs:
         if: contains(github.ref, 'develop') || contains(github.ref, 'main')
         run: |
           docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t practice -f ./infra/Dockerfile .
+          docker build -t practice -f ./Dockerfile .
           docker tag practice:latest ${{ secrets.DOCKER_ID }}/practice:latest
           docker push ${{ secrets.DOCKER_ID }}/practice:latest
 
@@ -77,3 +77,49 @@ jobs:
              sudo docker pull ${{ secrets.DOCKER_REPO }}/goorm
              docker run -d --name goorm -p 8080:8080 ${{ secrets.DOCKER_REPO }}/goorm
              docker rmi -f $(docker images -f "dangling=true" -q)
+
+  pull_from_registry:
+    name: Connect server ssh and pull from container registry
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Github action IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
+      - name: Setting environment variables
+        run: |
+          echo "AWS_DEFAULT_REGION=ap-northeast-2" >> $GITHUB_ENV
+          echo "AWS_SG_NAME=testCICD" >> $GITHUB_ENV
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Add Github Actions IP to Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} |
+          --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ap-northeast-2
+
+      - name: Deploy to prod
+        if: contains(github.ref, 'develop') || contains(github.ref, 'main')
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_NAME }}
+          username: ${{ secrets.EC2_USER_NAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USER }}/tming:latest
+            docker stop tming
+            docker rm tming
+            docker run -d --network tming --name tming -p 8080:8080 ${{ secrets.DOCKER_USER }}/tming
+            if docker images -f "dangling=true" -q | grep . > /dev/null; then
+              docker rmi $(docker images -f "dangling=true" -q)
