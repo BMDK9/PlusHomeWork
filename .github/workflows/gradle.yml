@@ -62,23 +62,6 @@ jobs:
           docker tag practice:latest ${{ secrets.DOCKER_ID }}/practice:latest
           docker push ${{ secrets.DOCKER_ID }}/practice:latest
 
-      #docker 이미지를 ec2 서버에 다운 실행
-      - name: Deploy to Prod
-        uses: appleboy/ssh-action@master
-        id: deploy-prod
-        with:
-          host: ${{ secrets.EC2_HOST_NAME }}
-          username: ${{ secrets.EC2_USER_NAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: ${{ secrets.EC2_PORT }}
-          envs: GITHUB_SHA
-          script: |
-             docker stop goorm
-             docker rm goorm
-             sudo docker pull ${{ secrets.DOCKER_REPO }}/goorm
-             docker run -d --name goorm -p 8080:8080 ${{ secrets.DOCKER_REPO }}/goorm
-             docker rmi -f $(docker images -f "dangling=true" -q)
-
   pull_from_registry:
     name: Connect server ssh and pull from container registry
     needs: push_to_registry
@@ -109,6 +92,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ap-northeast-2
 
+      #docker 이미지를 ec2 서버에 다운 실행
       - name: Deploy to prod
         if: contains(github.ref, 'develop') || contains(github.ref, 'main')
         uses: appleboy/ssh-action@master
