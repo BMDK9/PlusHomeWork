@@ -77,9 +77,10 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            docker pull ${{ secrets.DOCKER_USER }}/practice:latest
+            docker pull ${{ secrets.DOCKER_ID }}/practice:latest
             docker stop practice
             docker rm practice
-            docker run -d --network practice --name practice -p 8080:8080 ${{ secrets.DOCKER_USER }}/tming
+            docker run -d --network practice --name practice -p 8080:8080 ${{ secrets.DOCKER_ID }}/practice
             if docker images -f "dangling=true" -q | grep . > /dev/null; then
               docker rmi $(docker images -f "dangling=true" -q)
+            fi
