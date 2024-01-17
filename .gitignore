@@ -39,3 +39,4 @@ out/
 ### properties ###
 application-prod.properties
 /CD.pem
+/.github/gradle.text
