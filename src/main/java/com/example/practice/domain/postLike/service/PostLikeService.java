@@ -32,8 +32,7 @@ public class PostLikeService {
         return PostLikeResponseDto.of(postLike.getIsPostLiked());
     }
 
-    @Transactional
-    public PostLike savePostLike(User user, Post post) {
+    private PostLike savePostLike(User user, Post post) {
         PostLike postLike = PostLike.builder()
             .user(user)
             .post(post)
