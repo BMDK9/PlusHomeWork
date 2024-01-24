@@ -23,13 +23,13 @@ public class GetPostResponseDto {
     private Long postLikeCnt;
     private Boolean isPostLiked;
     private LocalDateTime createdAt;
-    private List<CommentResponseDto> commentPage;
+    private Page<CommentResponseDto> commentPage;
 
 
     @Builder
     private GetPostResponseDto(Long id, String title, String username, String content,
                                String image, Long postLikeCnt, Boolean isPostLiked,
-                               LocalDateTime createdAt, List<CommentResponseDto> commentPage) {
+                               LocalDateTime createdAt, Page<CommentResponseDto> commentPage) {
         this.id = id;
         this.title = title;
         this.username = username;
@@ -41,7 +41,7 @@ public class GetPostResponseDto {
         this.commentPage = commentPage;
     }
 
-    public static GetPostResponseDto of(Post post, Boolean isPostLiked, List<CommentResponseDto> commentPage) {
+    public static GetPostResponseDto of(Post post, Boolean isPostLiked, Page<CommentResponseDto> commentPage) {
         return GetPostResponseDto.builder()
             .id(post.getId())
             .title(post.getTitle())

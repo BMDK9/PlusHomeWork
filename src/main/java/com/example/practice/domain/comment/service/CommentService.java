@@ -10,7 +10,10 @@ import com.example.practice.domain.comment.exception.CommentException;
 import com.example.practice.domain.comment.repository.CommentRepository;
 import com.example.practice.domain.post.entity.Post;
 import com.example.practice.domain.user.entity.User;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +41,16 @@ public class CommentService {
         return CreateCommentResponseDto.of(saveComment);
     }
 
-    public List<CommentResponseDto> getCommentPage(Pageable pageable) {
-        return commentRepository.findAll(pageable).stream().map(CommentResponseDto::of).toList();
+    public Page<CommentResponseDto> getCommentPage(Post post, Pageable pageable) {
+        Page<Comment> commentPage = commentRepository.findAllByPostId(post.getId(), pageable);
+        List<CommentResponseDto> responseDtoList = new ArrayList<>();
+
+        for (Comment comment : commentPage) {
+            CommentResponseDto res = CommentResponseDto.of(comment);
+            responseDtoList.add(res);
+        }
+
+        return new PageImpl<>(responseDtoList, pageable, commentPage.getTotalElements());
     }
 
     @Transactional

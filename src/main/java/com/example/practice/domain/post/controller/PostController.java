@@ -9,9 +9,11 @@ import com.example.practice.domain.post.dto.UpdatePostResponseDto;
 import com.example.practice.domain.post.service.PostService;
 import com.example.practice.global.common.CommonCode;
 import com.example.practice.global.security.UserDetailsImpl;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +41,8 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public GetPostResponseDto getPost(Pageable pageable,
+    public GetPostResponseDto getPost(
+            @PageableDefault(size = 5, sort = "card_id", direction = Sort.Direction.DESC) Pageable pageable,
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         GetPostResponseDto responseDto = postService.getPost(pageable, postId,
@@ -47,8 +50,14 @@ public class PostController {
         return responseDto;
     }
 
+    //    @GetMapping
+//    public List<GetPostPageResponseDto> getPostPage(Pageable pageable,
+//            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        return postService.getPostPage(pageable, userDetails.getUser());
+//    }
     @GetMapping
-    public List<GetPostPageResponseDto> getPostPage(Pageable pageable,
+    public Page<GetPostPageResponseDto> getPostPage(
+            @PageableDefault(size = 5, sort = "card_id", direction = Sort.Direction.DESC) Pageable pageable,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.getPostPage(pageable, userDetails.getUser());
     }
