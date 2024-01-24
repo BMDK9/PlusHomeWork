@@ -57,13 +57,13 @@ public class WebSecurityConfig {
         // 접근 허가 url 정해주는 파트
         http.authorizeHttpRequests((authorizeHttpRequests) ->
             authorizeHttpRequests
-//                .requestMatchers("/error").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                 .requestMatchers("/api/users/signup").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                 .requestMatchers("/api/users/login").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                 .requestMatchers("/api/users/check-name").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허
                 .requestMatchers("/api/posts/**").permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                .requestMatchers("/").permitAll()
                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
