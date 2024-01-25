@@ -42,7 +42,7 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public GetPostResponseDto getPost(
-            @PageableDefault(size = 5, sort = "card_id", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(size = 5, sort = "comment_id", direction = Sort.Direction.DESC) Pageable pageable,
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         GetPostResponseDto responseDto = postService.getPost(pageable, postId,
@@ -57,7 +57,7 @@ public class PostController {
 //    }
     @GetMapping
     public Page<GetPostPageResponseDto> getPostPage(
-            @PageableDefault(size = 5, sort = "card_id", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(size = 5, sort = "post_id", direction = Sort.Direction.DESC) Pageable pageable,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.getPostPage(pageable, userDetails.getUser());
     }
