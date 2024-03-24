@@ -1,9 +1,16 @@
+**토이 프로젝트**
+
+---
 # PlusHomeWork
 구현하지 못한 부분은 이메일 인증 부분입니다.
 해당 기능을 구현하기 위해서는 Redis 환경의 구축이 필요하다고 생각됩니다.
 저는 아직 Redis 환경을 할 줄 모르기에 다른 과제들부터 먼저 진행했고 시간 문제로 인해 결국 인증 부분을 미구현한 채로 제출합니다.
 
 같은 이유로 테스트 코드 또한 미구현 상태로 제출합니다.
+
+---
+
+[2024.03.24 인터페이스 적용 리팩토링 시작](https://github.com/BMDK9/PlusHomeWork/wiki/Interface-%ED%99%9C%EC%9A%A9-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)
 
 ## ERD
 ![PracticeERD](https://github.com/BMDK9/PlusHomeWork/assets/144665614/845c7b46-3cd4-42ef-bfd0-322c78a34179)
