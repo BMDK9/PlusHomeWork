@@ -63,7 +63,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/users/check-name").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허
                 .requestMatchers("/api/posts/**").permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                .requestMatchers("/").permitAll()
+//                .requestMatchers("/").permitAll()
                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
 
