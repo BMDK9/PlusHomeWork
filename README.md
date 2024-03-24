@@ -10,7 +10,7 @@
 
 ---
 
-2024.03.24 인터페이스 적용 리팩토링 시작
+[2024.03.24 인터페이스 적용 리팩토링 시작](https://github.com/BMDK9/PlusHomeWork/wiki/Interface-%ED%99%9C%EC%9A%A9-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)
 
 ## ERD
 ![PracticeERD](https://github.com/BMDK9/PlusHomeWork/assets/144665614/845c7b46-3cd4-42ef-bfd0-322c78a34179)
