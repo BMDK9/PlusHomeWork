@@ -8,6 +8,10 @@
 
 같은 이유로 테스트 코드 또한 미구현 상태로 제출합니다.
 
+---
+
+2024.03.24 인터페이스 적용 리팩토링 시작
+
 ## ERD
 ![PracticeERD](https://github.com/BMDK9/PlusHomeWork/assets/144665614/845c7b46-3cd4-42ef-bfd0-322c78a34179)
 
