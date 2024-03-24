@@ -66,9 +66,7 @@ public class PostController {
     public UpdatePostResponseDto updatePost(@PathVariable Long postId,
             @RequestBody UpdatePostRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        UpdatePostResponseDto responseDto = postService.updatePost(postId, requestDto,
-                userDetails.getUser());
-        return responseDto;
+        return postService.updatePost(postId, requestDto, userDetails.getUser());
     }
 
     @DeleteMapping("/{postId}")
