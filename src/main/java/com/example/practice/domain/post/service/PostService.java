@@ -18,6 +18,7 @@ import com.example.practice.domain.post.exception.PostException;
 import com.example.practice.domain.post.repository.PostRepository;
 import com.example.practice.domain.postLike.entity.PostLike;
 import com.example.practice.domain.user.entity.User;
+import com.example.practice.global.inter.service.CrudService;
 import com.example.practice.global.security.UserDetailsImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PostService {
+public class PostService implements CrudService {
 
     private final PostRepository postRepository;
     private final CommentService commentService;
