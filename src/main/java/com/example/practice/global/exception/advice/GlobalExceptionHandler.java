@@ -46,7 +46,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
         MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatusCode statusCode,
         WebRequest request) {
-        log.warn("handleIllegalArgument", exception); // 이 부분 후에 수정이 필요할 듯 함
+        log.warn("handleIllegalArgument", exception);
         CommonErrorCode commonErrorCode = CommonErrorCode.INVALID_PARAMETER;
         return handleExceptionInternal(exception, commonErrorCode);
     }
